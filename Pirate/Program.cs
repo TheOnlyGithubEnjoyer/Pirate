@@ -39,7 +39,7 @@ while (!Raylib.WindowShouldClose())
 {
     moveX = false;
     moveY = false;
-    
+
     if (level == "stage1" || level == "stage2")
     {
         movement = ReadMovement(speed);
@@ -56,6 +56,9 @@ while (!Raylib.WindowShouldClose())
     }
 }
 
+if (moveX == true) playerRect.x -= movement.X;
+if (moveY == true) playerRect.y -= movement.Y;
+
 Raylib.BeginDrawing();
 {
 
@@ -63,7 +66,8 @@ if (level == "stage1" || level == "stage2")
 {
     Raylib.ClearBackground(Color.WHITE);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-}     
+}  
+
 
 }
 
