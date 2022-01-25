@@ -20,7 +20,7 @@ static void WriteCentered(string text)
 
 Console.ReadLine();
 
-Raylib.InitWindow(800,600, "Pirate");
+Raylib.InitWindow(800, 600, "Pirate");
 Raylib.SetTargetFPS(60);
 
 Texture2D playerImage = Raylib.LoadTexture("pirate.png");
@@ -40,13 +40,13 @@ while (!Raylib.WindowShouldClose())
     moveX = false;
     moveY = false;
 
-    if (level == "stage1" || level == "stage2")
+    if (level == "stage1")
     {
         movement = ReadMovement(speed);
         playerRect.x += movement.X;
         playerRect.y += movement.Y;
 
-            if (playerRect.x < 0 || playerRect.x + playerRect.width > Raylib.GetScreenWidth())
+    if (playerRect.x < 0 || playerRect.x > 800)
     {
         moveX = true;
     }
@@ -54,6 +54,35 @@ while (!Raylib.WindowShouldClose())
     {
         moveY = true;
     }
+    if (playerRect.x > 800)
+    {
+        level ="stage2";
+        playerRect.x = 0;
+    }
+
+}
+
+if (level == "stage2")
+{
+        
+        movement = ReadMovement(speed);
+        playerRect.x += movement.X;
+        playerRect.y += movement.Y;
+
+    if (playerRect.x < 0 || playerRect.x + playerRect.width > Raylib.GetScreenWidth())
+    {
+        moveX = true;
+    }
+    if (playerRect.y < 0 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
+    {
+        moveY = true;
+    }
+        if (playerRect.x < 0)
+    {
+        level ="stage1";
+        playerRect.x = 800;
+    }
+
 }
 
 if (moveX == true) playerRect.x -= movement.X;
@@ -62,12 +91,16 @@ if (moveY == true) playerRect.y -= movement.Y;
 Raylib.BeginDrawing();
 {
 
-if (level == "stage1" || level == "stage2")
+if (level == "stage1")
 {
     Raylib.ClearBackground(Color.WHITE);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-}  
-
+}
+if (level == "stage2")
+{
+    Raylib.ClearBackground(Color.GREEN);
+    Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+}
 
 }
 
@@ -84,4 +117,5 @@ static Vector2 ReadMovement(float speed)
     return movement;
 }
 }
+
 
