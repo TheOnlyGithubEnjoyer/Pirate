@@ -2,8 +2,12 @@
 using Raylib_cs;
 using System.Numerics;
 
+string answer; 
+
 WriteCentered("You Are About to Start The Pirate Game!");
-WriteCentered("Press Enter To Load In");
+WriteCentered("What is Your Name: ");
+
+answer = Console.ReadLine();
 
 static void WriteCentered(string text)
 {
@@ -18,7 +22,10 @@ static void WriteCentered(string text)
     Console.WriteLine(text);
 }
 
+WriteCentered("Hello " + answer + "! Press Enter to Start");
+
 Console.ReadLine();
+
 
 Raylib.InitWindow(800, 600, "Pirate");
 Raylib.SetTargetFPS(60);
