@@ -4,12 +4,12 @@ using System.Numerics;
 
 string answer; 
 
-WriteCentered("You Are About to Start The Pirate Game!");
-WriteCentered("What is Your Name: ");
+Centered("You Are About to Start The Pirate Game!");
+Centered("What is Your Name: ");
 
 answer = Console.ReadLine();
 
-static void WriteCentered(string text)
+static void Centered(string text)
 {
     int numberOfSpaces = Console.WindowWidth / 2 - text.Length /2;
 
@@ -22,7 +22,7 @@ static void WriteCentered(string text)
     Console.WriteLine(text);
 }
 
-WriteCentered("Hello " + answer + "! Press Enter to Start");
+Centered("Hello " + answer + "! Press Enter to Start");
 
 Console.ReadLine();
 
@@ -30,8 +30,12 @@ Console.ReadLine();
 Raylib.InitWindow(800, 600, "Pirate");
 Raylib.SetTargetFPS(60);
 
+
 Texture2D playerImage = Raylib.LoadTexture("pirate.png");
 Rectangle playerRect = new Rectangle(15, 300, playerImage.width, playerImage.height);
+
+Rectangle wallRect = new Rectangle(0, 0, 800, 40);
+
 
 float speed = 3.5f;
 
@@ -57,7 +61,7 @@ while (!Raylib.WindowShouldClose())
     {
         moveX = true;
     }
-    if (playerRect.y < 0 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
+    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
     {
         moveY = true;
     }
@@ -101,8 +105,12 @@ Raylib.BeginDrawing();
 if (level == "stage1")
 {
     Raylib.ClearBackground(Color.WHITE);
+    Raylib.DrawRectangleRec(wallRect, Color.ORANGE);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    
 }
+
+
 if (level == "stage2")
 {
     Raylib.ClearBackground(Color.GREEN);
