@@ -80,17 +80,44 @@ if (level == "stage2")
         playerRect.x += movement.X;
         playerRect.y += movement.Y;
 
-    if (playerRect.x < 0 || playerRect.x + playerRect.width > Raylib.GetScreenWidth())
+    if (playerRect.x < 0 || playerRect.x > 800)
     {
         moveX = true;
     }
-    if (playerRect.y < 0 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
+    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
     {
         moveY = true;
+    }
+        if (playerRect.x > 800)
+    {
+        level = "stage3";
+        playerRect.x = 0;
     }
         if (playerRect.x < 0)
     {
         level ="stage1";
+        playerRect.x = 800;
+    }
+
+}
+
+    if (level == "stage3")
+    {
+        movement = ReadMovement(speed);
+        playerRect.x += movement.X;
+        playerRect.y += movement.Y;
+
+    if (playerRect.x < 0 || playerRect.x > 800)
+    {
+        moveX = true;
+    }
+    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
+    {
+        moveY = true;
+    }
+    if (playerRect.x < 0)
+    {
+        level ="stage2";
         playerRect.x = 800;
     }
 
@@ -104,8 +131,8 @@ Raylib.BeginDrawing();
 
 if (level == "stage1")
 {
-    Raylib.ClearBackground(Color.WHITE);
-    Raylib.DrawRectangleRec(wallRect, Color.ORANGE);
+    Raylib.ClearBackground(Color.YELLOW);
+    Raylib.DrawRectangleRec(wallRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     
 }
@@ -113,7 +140,15 @@ if (level == "stage1")
 
 if (level == "stage2")
 {
-    Raylib.ClearBackground(Color.GREEN);
+    Raylib.ClearBackground(Color.ORANGE);
+    Raylib.DrawRectangleRec(wallRect, Color.BLACK);
+    Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+}
+
+if (level == "stage3")
+{
+    Raylib.ClearBackground(Color.RED);
+    Raylib.DrawRectangleRec(wallRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
 }
 
