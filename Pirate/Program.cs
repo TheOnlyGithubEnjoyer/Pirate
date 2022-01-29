@@ -4,8 +4,10 @@ using System.Numerics;
 
 string answer; 
 
-Centered("You Are About to Start The Pirate Game!");
+string selection;
+
 Centered("What is Your Name: ");
+
 
 answer = Console.ReadLine();
 
@@ -22,7 +24,29 @@ static void Centered(string text)
     Console.WriteLine(text);
 }
 
-Centered("Hello " + answer + "! Press Enter to Start");
+Centered("Hello " + answer + "! What Character Would You Like to Be?");
+Centered("Pirate or Zombie?");
+
+
+
+selection = Console.ReadLine();
+selection = selection.ToLower();
+
+if (selection == "pirate")
+{
+    Centered("Welcome to THE PIRATE GAME!");
+    Centered(answer + " (" + selection + ")" );
+    Centered("Press Enter to Start!");
+}
+
+if (selection == "zombie")
+{
+    Centered("Welcome to THE ZOMBIE GAME!");
+    Centered(answer + " (" + selection + ")" );
+    Centered("Press Enter to Start!");
+}
+
+
 
 Console.ReadLine();
 
@@ -107,7 +131,7 @@ if (level == "stage2")
         playerRect.x += movement.X;
         playerRect.y += movement.Y;
 
-    if (playerRect.x < 0 || playerRect.x > 800)
+    if (playerRect.x < 0 || playerRect.x + playerRect.width > Raylib.GetScreenWidth())
     {
         moveX = true;
     }
