@@ -4,10 +4,7 @@ using System.Numerics;
 
 string answer; 
 
-string selection;
-
 Centered("What is Your Name: ");
-
 
 answer = Console.ReadLine();
 
@@ -24,31 +21,34 @@ static void Centered(string text)
     Console.WriteLine(text);
 }
 
-Centered("Hello " + answer + "! What Character Would You Like to Be?");
-Centered("Pirate or Zombie?");
 
+int character = 0;
+bool success = false;
 
-
-selection = Console.ReadLine();
-selection = selection.ToLower();
-
-if (selection == "pirate")
+while (success != true)
 {
-    Centered("Welcome to THE PIRATE GAME!");
-    Centered(answer + " (" + selection + ")" );
-    Centered("Press Enter to Start!");
-}
+Centered("Pick Character! 1 (pirate) 2 (zombie)");
+string input = Console.ReadLine();
 
-if (selection == "zombie")
+success = int.TryParse(input, out character); // Så att man kan använda siffror och bosktäver.
+}
+if (success == true)
 {
-    Centered("Welcome to THE ZOMBIE GAME!");
-    Centered(answer + " (" + selection + ")" );
-    Centered("Press Enter to Start!");
+    if (character == 1)
+{
+    Centered("Welcome " + answer + " (Pirate)");
+    Centered("Press Enter To Contiune");
 }
+    else if (character == 2)
+    {
+        Centered("Welcome " + answer + " (Zombie)");
+        Centered("Press Enter To Continue");
+    }
 
-
+}
 
 Console.ReadLine();
+
 
 
 Raylib.InitWindow(800, 600, "Pirate");
@@ -56,9 +56,11 @@ Raylib.SetTargetFPS(60);
 
 
 Texture2D playerImage = Raylib.LoadTexture("pirate.png");
-Rectangle playerRect = new Rectangle(15, 300, playerImage.width, playerImage.height);
+Rectangle playerRect = new Rectangle(15, 300, 30, 30);
 
-Rectangle wallRect = new Rectangle(0, 0, 800, 40);
+Texture2D player2Image = Raylib.LoadTexture("zombie.png");
+
+Rectangle headerRect = new Rectangle(0, 0, 800, 40);
 
 
 float speed = 3.5f;
@@ -153,10 +155,12 @@ if (moveY == true) playerRect.y -= movement.Y;
 Raylib.BeginDrawing();
 {
 
+if (character == 1)
+{
 if (level == "stage1")
 {
     Raylib.ClearBackground(Color.YELLOW);
-    Raylib.DrawRectangleRec(wallRect, Color.BLACK);
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     
 }
@@ -165,15 +169,43 @@ if (level == "stage1")
 if (level == "stage2")
 {
     Raylib.ClearBackground(Color.ORANGE);
-    Raylib.DrawRectangleRec(wallRect, Color.BLACK);
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
 }
 
 if (level == "stage3")
 {
     Raylib.ClearBackground(Color.RED);
-    Raylib.DrawRectangleRec(wallRect, Color.BLACK);
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+}
+
+}
+}
+
+if (character == 2)
+{
+if (level == "stage1")
+{
+    Raylib.ClearBackground(Color.YELLOW);
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    
+}
+
+
+if (level == "stage2")
+{
+    Raylib.ClearBackground(Color.ORANGE);
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+}
+
+if (level == "stage3")
+{
+    Raylib.ClearBackground(Color.RED);
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
 }
 
 }
