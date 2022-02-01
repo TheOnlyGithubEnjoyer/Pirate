@@ -159,8 +159,10 @@ if (level == "stage1")
     Raylib.ClearBackground(Color.YELLOW);           // Everything in first stage
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);     
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Level 1", 700, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
+    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
+
 
 }
 
@@ -170,8 +172,9 @@ if (level == "stage2")
     Raylib.ClearBackground(Color.GOLD);        // Everything in second stage    
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Level 2", 700, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
+    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
 }
 
 if (level == "stage3")
@@ -179,8 +182,10 @@ if (level == "stage3")
     Raylib.ClearBackground(Color.ORANGE);                  // Everything in third stage
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Level 3", 700, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
+    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
+
 }
 
 }
@@ -193,8 +198,9 @@ if (level == "stage1")
     Raylib.ClearBackground(Color.MAGENTA);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Level 1", 700, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
+    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
     
 }
 
@@ -203,8 +209,9 @@ if (level == "stage2")
     Raylib.ClearBackground(Color.PURPLE);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Level 2", 700, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
+    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
 }
 
 if (level == "stage3")
@@ -212,10 +219,10 @@ if (level == "stage3")
     Raylib.ClearBackground(Color.VIOLET);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Level 3", 700, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
+    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
 }
-
 }
 
 Raylib.EndDrawing();
