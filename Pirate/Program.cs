@@ -12,7 +12,7 @@ static void Centered(string text)
 {
     int numberOfSpaces = Console.WindowWidth / 2 - text.Length /2;
 
-    int i = 0;
+    int i = 0;                    //Makes the introduction more clean with centered writing
     while (i < numberOfSpaces)
     {
         i++;
@@ -27,46 +27,43 @@ bool success = false;
 
 while (success != true)
 {
-Centered("Pick Character! 1 (pirate) 2 (zombie)");
+Centered("Pick Character! 1 (pirate) or 2 (zombie)");
 string input = Console.ReadLine();
 
-success = int.TryParse(input, out character); // Så att man kan använda siffror och bosktäver.
+success = int.TryParse(input, out character); // Tryparse for choosing character between numbers 1 and 2
 }
 if (success == true)
 {
-    if (character == 1)
+    if (character == 1)                // Choosing different character makes the writing different
 {
-    Centered("Welcome " + answer + " (Pirate)");
-    Centered("Press Enter To Contiune");
+    Centered("Welcome To The Obstacle Game " + answer + " (Pirate)");
+    Centered("Press Enter To Continue"); 
 }
     else if (character == 2)
     {
-        Centered("Welcome " + answer + " (Zombie)");
+        Centered("Welcome To The Obstacle Game " + answer + " (Zombie)");
         Centered("Press Enter To Continue");
     }
-
 }
 
 Console.ReadLine();
-
-
 
 Raylib.InitWindow(800, 600, "Pirate");
 Raylib.SetTargetFPS(60);
 
 
-Texture2D playerImage = Raylib.LoadTexture("pirate.png");
-Rectangle playerRect = new Rectangle(15, 300, 30, 30);
+Texture2D playerImage = Raylib.LoadTexture("pirate.png"); 
+Rectangle playerRect = new Rectangle(15, 300, 30, 30); 
 
-Texture2D player2Image = Raylib.LoadTexture("zombie.png");
+Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual 
 
-Rectangle headerRect = new Rectangle(0, 0, 800, 40);
+Rectangle headerRect = new Rectangle(0, 0, 800, 40); 
 
 
-float speed = 3.5f;
+float speed = 3.5f;           
 
-bool moveX = false;
-bool moveY = false;
+bool moveX = false;         
+bool moveY = false;                 
 
 Vector2 movement = new Vector2();
 
@@ -80,16 +77,16 @@ while (!Raylib.WindowShouldClose())
     if (level == "stage1")
     {
         movement = ReadMovement(speed);
-        playerRect.x += movement.X;
+        playerRect.x += movement.X;     // Movement of character
         playerRect.y += movement.Y;
 
     if (playerRect.x < 0 || playerRect.x > 800)
     {
-        moveX = true;
+        moveX = true;           // Makes is so that you can reach different levels 
     }
-    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
+    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight()) 
     {
-        moveY = true;
+        moveY = true;       // So you dont go through the header
     }
     if (playerRect.x > 800)
     {
@@ -155,57 +152,68 @@ if (moveY == true) playerRect.y -= movement.Y;
 Raylib.BeginDrawing();
 {
 
-if (character == 1)
+if (character == 1) // Gameplay if you choose pirate as character
 {
 if (level == "stage1")
 {
-    Raylib.ClearBackground(Color.YELLOW);
-    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.ClearBackground(Color.YELLOW);           // Everything in first stage
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);     
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    
+    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 1", 700, 10, 22, Color.WHITE);
+
 }
 
 
 if (level == "stage2")
 {
-    Raylib.ClearBackground(Color.ORANGE);
+    Raylib.ClearBackground(Color.GOLD);        // Everything in second stage    
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 2", 700, 10, 22, Color.WHITE);
 }
 
 if (level == "stage3")
 {
-    Raylib.ClearBackground(Color.RED);
+    Raylib.ClearBackground(Color.ORANGE);                  // Everything in third stage
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 3", 700, 10, 22, Color.WHITE);
 }
 
 }
 }
 
-if (character == 2)
+if (character == 2) // Gameplay if you choose zombie as character
 {
 if (level == "stage1")
 {
-    Raylib.ClearBackground(Color.YELLOW);
+    Raylib.ClearBackground(Color.MAGENTA);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 1", 700, 10, 22, Color.WHITE);
     
 }
 
-
 if (level == "stage2")
 {
-    Raylib.ClearBackground(Color.ORANGE);
+    Raylib.ClearBackground(Color.PURPLE);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 2", 700, 10, 22, Color.WHITE);
 }
 
 if (level == "stage3")
 {
-    Raylib.ClearBackground(Color.RED);
+    Raylib.ClearBackground(Color.VIOLET);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawText("Score:", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Level 3", 700, 10, 22, Color.WHITE);
 }
 
 }
@@ -216,7 +224,7 @@ static Vector2 ReadMovement(float speed)
 {
     Vector2 movement = new Vector2();
     if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) movement.Y = -speed;
-    if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) movement.Y = speed;
+    if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) movement.Y = speed;    // Movement with keyboard keys funktion
     if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) movement.X = -speed;
     if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) movement.X = speed;     
 
