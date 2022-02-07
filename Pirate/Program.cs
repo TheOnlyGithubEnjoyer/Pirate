@@ -36,15 +36,16 @@ if (success == true)
 {
     if (character == 1)                // Choosing different character makes the writing different
 {
-    Centered("Welcome To The Obstacle Game " + answer + " (Pirate)");
+    Centered("Welcome To The Pirate Game " + answer + " (Pirate)");
     Centered("Press Enter To Continue"); 
 }
     else if (character == 2)
     {
-        Centered("Welcome To The Obstacle Game " + answer + " (Zombie)");
+        Centered("Welcome To The Zombie Game " + answer + " (Zombie)");
         Centered("Press Enter To Continue");
     }
 }
+
 
 Console.ReadLine();
 
@@ -58,6 +59,10 @@ Rectangle playerRect = new Rectangle(15, 300, 30, 30);
 Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual 
 
 Rectangle headerRect = new Rectangle(0, 0, 800, 40); 
+
+Texture2D wallImage = Raylib.LoadTexture("PirateWall.png");
+Rectangle wallRect = new Rectangle(400, 300, wallImage.width, wallImage.height);
+
 
 
 float speed = 3.5f;           
@@ -161,8 +166,7 @@ if (level == "stage1")
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
-    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
-
+    Raylib.DrawText("Pirate Game", 345, 10, 22, Color.WHITE);
 
 }
 
@@ -174,7 +178,8 @@ if (level == "stage2")
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
-    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
+    Raylib.DrawText("Pirate Game", 345, 10, 22, Color.WHITE);
+    
 }
 
 if (level == "stage3")
@@ -184,7 +189,7 @@ if (level == "stage3")
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
-    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
+    Raylib.DrawText("Pirate Game", 345, 10, 22, Color.WHITE);
 
 }
 
@@ -197,10 +202,11 @@ if (level == "stage1")
 {
     Raylib.ClearBackground(Color.MAGENTA);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.DrawTexture(wallImage, (int)wallRect.x, (int)wallRect.y, Color.WHITE);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
-    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
+    Raylib.DrawText("Zombie Game", 345, 10, 22, Color.WHITE);
     
 }
 
@@ -208,20 +214,22 @@ if (level == "stage2")
 {
     Raylib.ClearBackground(Color.PURPLE);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.DrawTexture(wallImage, (int)wallRect.x, (int)wallRect.y, Color.WHITE);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
-    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
+    Raylib.DrawText("Zombie Game", 345, 10, 22, Color.WHITE);
 }
 
 if (level == "stage3")
 {
     Raylib.ClearBackground(Color.VIOLET);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.DrawTexture(wallImage, (int)wallRect.x, (int)wallRect.y, Color.WHITE);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
-    Raylib.DrawText("Obstacle Game", 345, 10, 22, Color.WHITE);
+    Raylib.DrawText("Zombie Game", 345, 10, 22, Color.WHITE);
 }
 }
 
