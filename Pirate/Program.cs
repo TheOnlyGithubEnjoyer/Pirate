@@ -1,6 +1,7 @@
 ﻿using System;
 using Raylib_cs;
 using System.Numerics;
+using System.Collections.Generic;
 
 string answer; 
 
@@ -36,13 +37,13 @@ if (success == true)
 {
     if (character == 1)                // Choosing different character makes the writing different
 {
-    Centered("Welcome To The Pirate Game " + answer + " (Pirate)");
+    Centered("Welcome to The Pirate Game " + "(" + answer + " the Pirate" + ")");
     Centered("Press Enter To Continue"); 
 }
     else if (character == 2)
     {
-        Centered("Welcome To The Zombie Game " + answer + " (Zombie)");
-        Centered("Press Enter To Continue");
+        Centered("Welcome to The Zombie Game " + "(" + answer + " the Zombie" + ")");
+        Centered("Press Enter to Continue");
     }
 }
 
@@ -54,18 +55,21 @@ Raylib.SetTargetFPS(60);
 
 
 Texture2D playerImage = Raylib.LoadTexture("pirate.png"); 
-Rectangle playerRect = new Rectangle(15, 300, 30, 30); 
+Rectangle playerRect = new Rectangle(10, 60, 30, 30); 
 
-Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual 
+Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual
 
 Rectangle headerRect = new Rectangle(0, 0, 800, 40); 
 
-Texture2D wallImage = Raylib.LoadTexture("PirateWall.png");
-Rectangle wallRect = new Rectangle(400, 300, wallImage.width, wallImage.height);
+Texture2D wallImageLong = Raylib.LoadTexture("WallLong.png");
+Rectangle wallRectLong = new Rectangle(10, 450, wallImageLong.width, wallImageLong.height);
+
+Texture2D wallImageLonger = Raylib.LoadTexture("LongWall.png");
+Rectangle wallRectLonger = new Rectangle(0, 150, wallImageLonger.width, wallImageLonger.height);
 
 
 
-float speed = 3.5f;           
+float speed = 4f;           
 
 bool moveX = false;         
 bool moveY = false;                 
@@ -200,9 +204,14 @@ if (character == 2) // Gameplay if you choose zombie as character
 {
 if (level == "stage1")
 {
+    if (Raylib.CheckCollisionRecs(playerRect, wallRectLonger) || Raylib.CheckCollisionRecs(playerRect, wallRectLong))
+    {
+        level = "stage3";
+    }
     Raylib.ClearBackground(Color.MAGENTA);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-    Raylib.DrawTexture(wallImage, (int)wallRect.x, (int)wallRect.y, Color.WHITE);
+    Raylib.DrawTexture(wallImageLonger, (int)wallRectLonger.x, (int)wallRectLonger.y, Color.WHITE);
+    Raylib.DrawTexture(wallImageLonger, (int)wallRectLonger.x, (int)wallRectLonger.y, Color.WHITE);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
@@ -214,7 +223,6 @@ if (level == "stage2")
 {
     Raylib.ClearBackground(Color.PURPLE);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-    Raylib.DrawTexture(wallImage, (int)wallRect.x, (int)wallRect.y, Color.WHITE);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
@@ -225,7 +233,6 @@ if (level == "stage3")
 {
     Raylib.ClearBackground(Color.VIOLET);
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-    Raylib.DrawTexture(wallImage, (int)wallRect.x, (int)wallRect.y, Color.WHITE);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 675, 10, 22, Color.WHITE);
