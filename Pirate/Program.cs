@@ -68,12 +68,20 @@ for (int i = 0; i < 10; i++)
 {
 
 rects.Add(new Rectangle(0, 150, 50, 450));
-rects.Add(new Rectangle(120, 0, 50, 450));
-rects.Add(new Rectangle(240, 0, 50, 520));
-rects.Add(new Rectangle(350, 450, 45, 200));
-rects.Add(new Rectangle(460, 0, 50, 520));
+rects.Add(new Rectangle(140, 0, 50, 450));
+rects.Add(new Rectangle(250, 0, 50, 520));
+rects.Add(new Rectangle(370, 100, 45, 500));
+rects.Add(new Rectangle(480, 0, 50, 530));
+rects.Add(new Rectangle(700, 350, 50, 350));
+rects.Add(new Rectangle(600, 350, 120, 50));
+rects.Add(new Rectangle(700, 0, 50, 300));
+rects.Add(new Rectangle(600, 100, 50, 200));
+rects.Add(new Rectangle(600, 450, 40, 200));
+rects.Add(new Rectangle(850, 0, 50, 520));
+rects.Add(new Rectangle(950, 0, 50, 440));
 rects.Add(new Rectangle());
-
+rects.Add(new Rectangle());
+rects.Add(new Rectangle());
 }
 
 
@@ -222,10 +230,7 @@ if (character == 2) // Gameplay if you choose zombie as character
 if (level == "stage1")
 {
 
-    // if (Raylib.CheckCollisionRecs(playerRect, rects[i]))
-    // {
-    //     level = "end";
-    // }
+ 
     for (int i = 0; i < rects.Count; i++)
     {
     Rectangle rectangle = rects[i];
@@ -240,6 +245,11 @@ if (level == "stage1")
     Raylib.DrawText("Score:", 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
     
+       if (Raylib.CheckCollisionRecs(playerRect, rects[i]))
+    {
+        playerRect.x = 12;
+        playerRect.y = 60;
+    }
     }
 }
 
