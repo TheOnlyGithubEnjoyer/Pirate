@@ -79,9 +79,17 @@ rects.Add(new Rectangle(600, 100, 50, 200));
 rects.Add(new Rectangle(600, 450, 40, 200));
 rects.Add(new Rectangle(850, 0, 50, 520));
 rects.Add(new Rectangle(950, 0, 50, 440));
-rects.Add(new Rectangle());
-rects.Add(new Rectangle());
-rects.Add(new Rectangle());
+rects.Add(new Rectangle(1100, 180, 50, 420));
+rects.Add(new Rectangle(1230, 250, 100, 50));
+rects.Add(new Rectangle(1150, 400, 100, 50));
+rects.Add(new Rectangle(1330, 0, 50, 450));
+rects.Add(new Rectangle(1330, 520, 50, 90));
+rects.Add(new Rectangle(1330, 520, 250, 40));
+rects.Add(new Rectangle(1530, 150, 50, 400));
+rects.Add(new Rectangle(1580, 150, 250, 50));
+rects.Add(new Rectangle(1580, 90, 40, 100));
+rects.Add(new Rectangle(1680, 0, 180, 80));
+
 }
 
 
@@ -191,12 +199,27 @@ if (character == 1) // Gameplay if you choose pirate as character
 {
 if (level == "stage1")
 {
-    Raylib.ClearBackground(Color.YELLOW);           // Everything in first stage
-    Raylib.DrawRectangleRec(headerRect, Color.BLACK);     
-    Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    
+    for (int i = 0; i < rects.Count; i++)
+    {
+    Rectangle rectangle = rects[i];
+
+    rects[i] = rectangle;
+
+    Raylib.ClearBackground(Color.YELLOW);
+    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+    Raylib.DrawRectangleRec(rects[i], Color.BLACK);
+    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Score:", 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
+    
+       if (Raylib.CheckCollisionRecs(playerRect, rects[i]))
+    {
+        playerRect.x = 12;
+        playerRect.y = 60;
+    }
+    }
 
 }
 
