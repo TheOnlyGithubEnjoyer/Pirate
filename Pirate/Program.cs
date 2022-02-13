@@ -105,6 +105,8 @@ pointRecs.Add(new Rectangle(208, 60, 25, 25));
 
 int points = 0;
 
+int deaths = 0;
+
 bool pointTake = false;
 
 float speed = 4f;           
@@ -219,13 +221,15 @@ if (level == "stage1")
     Raylib.DrawRectangleRec(rects[i], Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score:" + points, 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Deaths (" + deaths + ")", 450, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
     
        if (Raylib.CheckCollisionRecs(playerRect, rects[i]))
     {
         playerRect.x = 12;
         playerRect.y = 60;
+        deaths++;
     }
     }
     for (int i = 0; i < pointRecs.Count; i++)
@@ -256,7 +260,7 @@ if (level == "stage2")
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score:", 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
     
 }
@@ -268,7 +272,7 @@ if (level == "stage3")
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score:", 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
 
 }
@@ -294,13 +298,15 @@ if (level == "stage1")
     Raylib.DrawRectangleRec(rects[i], Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score:", 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Deaths (" + deaths + ")", 450, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
     
        if (Raylib.CheckCollisionRecs(playerRect, rects[i]))
     {
         playerRect.x = 12;
         playerRect.y = 60;
+        deaths++;
     }
     }
        for (int i = 0; i < pointRecs.Count; i++)
@@ -330,7 +336,7 @@ if (level == "stage2")
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score:", 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
 }
 
@@ -341,13 +347,8 @@ if (level == "stage3")
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score:", 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
-}
-if (level == "end")
-{
-    Raylib.ClearBackground(Color.RED);
-    Raylib.DrawText("YOU DIED", 350, 300, 20, Color.WHITE);
 }
 }
 
