@@ -78,7 +78,7 @@ rects.Add(new Rectangle(600, 350, 120, 50));
 rects.Add(new Rectangle(700, 0, 50, 300));
 rects.Add(new Rectangle(600, 100, 50, 200));
 rects.Add(new Rectangle(600, 450, 40, 200));
-rects.Add(new Rectangle(850, 0, 50, 520));          // All the obstacles
+rects.Add(new Rectangle(850, 0, 50, 520));          // All the objects in the game
 rects.Add(new Rectangle(950, 0, 50, 440));
 rects.Add(new Rectangle(1100, 180, 50, 420));
 rects.Add(new Rectangle(1230, 250, 100, 50));
@@ -92,15 +92,10 @@ rects.Add(new Rectangle(1580, 90, 40, 100));
 rects.Add(new Rectangle(1680, 0, 180, 80));
 
 pointRecs.Add(new Rectangle(208, 60, 25, 25));
+pointRecs.Add(new Rectangle(658, 560, 25, 25));
+
 
 }
-
-
-// Texture2D wallImageLong = Raylib.LoadTexture("WallLong.png");
-// Rectangle wallRectLong = new Rectangle(10, 450, wallImageLong.width, wallImageLong.height);
-
-// Texture2D wallImageLonger = Raylib.LoadTexture("LongWall.png");
-// Rectangle wallRectLonger = new Rectangle(0, 150, wallImageLonger.width, wallImageLonger.height);
 
 
 int points = 0;
@@ -108,6 +103,8 @@ int points = 0;
 int deaths = 0;
 
 bool pointTake = false;
+
+bool pointTake2 = false;
 
 float speed = 4f;           
 
@@ -232,24 +229,27 @@ if (level == "stage1")
         deaths++;
     }
     }
-    for (int i = 0; i < pointRecs.Count; i++)
-    {
-        Rectangle rectangle = pointRecs[i];
-
-        pointRecs[i] = rectangle;
-
-            if (Raylib.CheckCollisionRecs(playerRect, pointRecs[i]) && pointTake == false)
+      if (Raylib.CheckCollisionRecs(playerRect, pointRecs[0]) && pointTake == false)
         {
-            points = points + 1;
+            points++;
             pointTake = true;
+            pointTake2 = true;
 
         }
         if (pointTake == false)
         {
-            Raylib.DrawRectangleRec(pointRecs[i], Color.GREEN);
-        }
+            Raylib.DrawRectangleRec(pointRecs[0], Color.GREEN);
 
-    }
+        }
+                if (pointTake2 == true)
+        {
+            Raylib.DrawRectangleRec(pointRecs[1], Color.GREEN);
+        }
+        if (Raylib.CheckCollisionRecs(playerRect, pointRecs[1]) && pointTake2 == true)
+        {
+            points++;
+            pointTake2 = false;
+        }
 
 }
 
@@ -276,7 +276,6 @@ if (level == "stage3")
     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
 
 }
-
 }
 }
 
@@ -309,24 +308,29 @@ if (level == "stage1")
         deaths++;
     }
     }
-       for (int i = 0; i < pointRecs.Count; i++)
-    {
-        Rectangle rectangle = pointRecs[i];
-
-        pointRecs[i] = rectangle;
-
-            if (Raylib.CheckCollisionRecs(playerRect, pointRecs[i]) && pointTake == false)
+      
+            if (Raylib.CheckCollisionRecs(playerRect, pointRecs[0]) && pointTake == false)
         {
-            points = points + 1;
+            points++;
             pointTake = true;
+            pointTake2 = true;
 
         }
         if (pointTake == false)
         {
-            Raylib.DrawRectangleRec(pointRecs[i], Color.GREEN);
+            Raylib.DrawRectangleRec(pointRecs[0], Color.GREEN);
+        }
+        if (pointTake2 == true)
+        {
+            Raylib.DrawRectangleRec(pointRecs[1], Color.GREEN);
+        }
+        if (Raylib.CheckCollisionRecs(playerRect, pointRecs[1]) && pointTake2 == true)
+        {
+            points++;
+            pointTake2 = false;
         }
 
-    }
+
 }
 
 if (level == "stage2")
