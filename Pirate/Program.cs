@@ -35,12 +35,12 @@ success = int.TryParse(input, out character); // Tryparse for choosing character
 }
 if (success == true)
 {
-    if (character == 1)                // Choosing different character makes the writing different
+    if (character == 1)                
 {
     Centered("Welcome to The Pirate Game " + "(" + answer + " the Pirate" + ")");
     Centered("Press Enter To Continue"); 
 }
-    else if (character == 2)
+    if (character == 2)
     {
         Centered("Welcome to The Zombie Game " + "(" + answer + " the Zombie" + ")");
         Centered("Press Enter to Continue");
@@ -78,7 +78,7 @@ rects.Add(new Rectangle(600, 350, 120, 50));
 rects.Add(new Rectangle(700, 0, 50, 300));
 rects.Add(new Rectangle(600, 100, 50, 200));
 rects.Add(new Rectangle(600, 450, 40, 200));
-rects.Add(new Rectangle(850, 0, 50, 520));          // All the objects in the game
+rects.Add(new Rectangle(850, 0, 50, 520));          // All the objects inside the game
 rects.Add(new Rectangle(950, 0, 50, 440));
 rects.Add(new Rectangle(1100, 180, 50, 420));
 rects.Add(new Rectangle(1230, 250, 100, 50));
@@ -106,7 +106,7 @@ bool pointTake = false;
 
 bool pointTake2 = false;
 
-float speed = 4f;           
+float speed = 6f;           
 
 bool moveX = false;         
 bool moveY = false;                 
@@ -143,23 +143,23 @@ while (!Raylib.WindowShouldClose())
 }
 
 if (level == "stage2")
-{
-        
-        movement = ReadMovement(speed);
-        playerRect.x += movement.X;
+{                                           //PSEUDOKOD
+                            
+        movement = ReadMovement(speed);     // if (level of the game is 1)
+        playerRect.x += movement.X;         // {movement of the character will be read and will have a speed
         playerRect.y += movement.Y;
 
-    if (playerRect.x < 0 || playerRect.x > 1800)
-    {
-        moveX = true;
+    if (playerRect.x < 0 || playerRect.x > 1800)    // if (the size of the player is less than 0 in x value or if the size
+    {                                               // of the player is at a bigger x value than 1800) 
+        moveX = true;                               // {movement left and right will work}
     }
-    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
-    {
-        moveY = true;
+    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight()) // if (the value of y on the player goes lower than 42 or if the value of y
+    {                                                                                     // and the height of the player is a bigger value on y than the screen width)
+        moveY = true;                                                                     // {movement down and up will work}
     }
-        if (playerRect.x > 1800)
-    {
-        level = "stage3";
+        if (playerRect.x > 1800)                    // if (the player size of the x value exceeds 1800 in the x value)
+    {                                               // {let the level change from "stage1" to "stage2"
+        level = "stage3";                           // make the x value of the player also end up at 0}
         playerRect.x = 0;
     }
         if (playerRect.x < 0)
@@ -216,7 +216,7 @@ if (level == "stage1")
 
     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
     Raylib.DrawRectangleRec(rects[i], Color.BLACK);
-    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Deaths (" + deaths + ")", 450, 10, 22, Color.WHITE);
     Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
