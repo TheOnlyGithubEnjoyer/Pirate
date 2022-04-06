@@ -58,6 +58,7 @@ Rectangle playerRect = new Rectangle(10, 60, 30, 30);
 
 Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual
 Texture2D player2ImageDeagle = Raylib.LoadTexture("ZombieDeagle.png");
+Texture2D player2ImageAk = Raylib.LoadTexture("ZombieAk.png");
 
 Texture2D backgroundImage = Raylib.LoadTexture("The_Hell.png");
 Rectangle backgroundRect = new Rectangle(0, 0, backgroundImage.width, backgroundImage.height);
@@ -109,6 +110,8 @@ int deaths = 0;
 bool pointTake = false;
 
 bool pointTake2 = false;
+
+bool pointTake3 = false;
 
 float speed = 5f;           
 
@@ -333,6 +336,11 @@ if (level == "stage1")
         {
             points++;
             pointTake2 = false;
+            pointTake3 = true;
+        }
+        if (pointTake3 == true)
+        {
+            Raylib.DrawTexture(player2ImageAk,(int)playerRect.x, (int)playerRect.y, Color.WHITE);
         }
 
 
