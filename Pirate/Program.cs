@@ -57,6 +57,10 @@ Texture2D playerImage = Raylib.LoadTexture("pirate.png");
 Rectangle playerRect = new Rectangle(10, 60, 30, 30); 
 
 Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual
+Texture2D player2ImageDeagle = Raylib.LoadTexture("ZombieDeagle.png");
+
+Texture2D backgroundImage = Raylib.LoadTexture("The_Hell.png");
+Rectangle backgroundRect = new Rectangle(0, 0, backgroundImage.width, backgroundImage.height);
 
 Rectangle headerRect = new Rectangle(0, 0, 1800, 40); 
 
@@ -106,7 +110,7 @@ bool pointTake = false;
 
 bool pointTake2 = false;
 
-float speed = 6f;           
+float speed = 5f;           
 
 bool moveX = false;         
 bool moveY = false;                 
@@ -284,8 +288,7 @@ if (character == 2) // Gameplay if you choose zombie as character
 if (level == "stage1")
 {
 
-    Raylib.DrawRectangle(0, 300, 1800, 600, Color.LIGHTGRAY);
-    Raylib.ClearBackground(Color.MAGENTA); 
+    Raylib.DrawTexture(backgroundImage, (int)backgroundRect.x, (int)backgroundRect.y, Color.WHITE);
 
     for (int i = 0; i < rects.Count; i++)
     {
@@ -323,6 +326,8 @@ if (level == "stage1")
         if (pointTake2 == true)
         {
             Raylib.DrawRectangleRec(pointRecs[1], Color.GREEN);
+            Raylib.DrawTexture(player2ImageDeagle, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+
         }
         if (Raylib.CheckCollisionRecs(playerRect, pointRecs[1]) && pointTake2 == true)
         {
