@@ -59,13 +59,14 @@ Rectangle playerRect = new Rectangle(10, 60, 30, 30);
 Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual
 Texture2D player2ImageDeagle = Raylib.LoadTexture("ZombieDeagle.png");
 Texture2D player2ImageAk = Raylib.LoadTexture("ZombieAk.png");
+Texture2D player2ImageRPG = Raylib.LoadTexture("zombieRPG.png");
 
-Texture2D backgroundImage = Raylib.LoadTexture("The_Hell.png");
+Texture2D backgroundImage = Raylib.LoadTexture("Background1.png");
 Rectangle backgroundRect = new Rectangle(0, 0, backgroundImage.width, backgroundImage.height);
 
 Rectangle headerRect = new Rectangle(0, 0, 1800, 40); 
 
-List<Rectangle> pointRecs = new List<Rectangle>();
+List<Rectangle> weaponRecs = new List<Rectangle>();
 
 List<Rectangle> rects = new List<Rectangle>();
 
@@ -96,22 +97,24 @@ rects.Add(new Rectangle(1580, 150, 250, 50));
 rects.Add(new Rectangle(1580, 90, 40, 100));
 rects.Add(new Rectangle(1680, 0, 180, 80));
 
-pointRecs.Add(new Rectangle(208, 60, 25, 25));
-pointRecs.Add(new Rectangle(658, 560, 25, 25));
+weaponRecs.Add(new Rectangle(208, 60, 25, 25));
+weaponRecs.Add(new Rectangle(658, 560, 25, 25));
+weaponRecs.Add(new Rectangle(1175, 560, 25, 25));
 
 
 }
 
 
-int points = 0;
 
 int deaths = 0;
 
-bool pointTake = false;
+bool weaponTake = false;
 
-bool pointTake2 = false;
+bool weaponTake2 = false;
 
-bool pointTake3 = false;
+bool weaponTake3 = false;
+
+bool weaponTake4 = false;
 
 float speed = 5f;           
 
@@ -226,7 +229,7 @@ if (level == "stage1")
     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Deaths (" + deaths + ")", 450, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
     
        if (Raylib.CheckCollisionRecs(playerRect, rects[i]))
@@ -236,52 +239,51 @@ if (level == "stage1")
         deaths++;
     }
     }
-      if (Raylib.CheckCollisionRecs(playerRect, pointRecs[0]) && pointTake == false)
+      if (Raylib.CheckCollisionRecs(playerRect, weaponRecs[0]) && weaponTake == false)
         {
-            points++;
-            pointTake = true;
-            pointTake2 = true;
+            weaponTake = true;
+            weaponTake2 = true;
 
         }
-        if (pointTake == false)
+        if (weaponTake == false)
         {
-            Raylib.DrawRectangleRec(pointRecs[0], Color.GREEN);
+            Raylib.DrawRectangleRec(weaponRecs[0], Color.GREEN);
 
         }
-                if (pointTake2 == true)
+                if (weaponTake2 == true)
         {
-            Raylib.DrawRectangleRec(pointRecs[1], Color.GREEN);
+            Raylib.DrawRectangleRec(weaponRecs[1], Color.GREEN);
         }
-        if (Raylib.CheckCollisionRecs(playerRect, pointRecs[1]) && pointTake2 == true)
+        if (Raylib.CheckCollisionRecs(playerRect, weaponRecs[1]) && weaponTake2 == true)
         {
-            pointTake2 = false;
+            weaponTake2 = false;
         }
 
 }
 
-if (level == "stage2")
-{
-    Raylib.DrawRectangle(0, 300, 1800, 600, Color.ORANGE);
-    Raylib.ClearBackground(Color.GOLD);        // Everything in second stage    
-    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-    Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
-    Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
+// if (level == "stage2")
+// {
+//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.ORANGE);
+//     Raylib.ClearBackground(Color.GOLD);        // Everything in second stage    
+//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+//     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+//     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
     
-}
+// }
 
-if (level == "stage3")
-{
-    Raylib.DrawRectangle(0, 300, 1800, 600, Color.ORANGE);
-    Raylib.ClearBackground(Color.BEIGE);                  // Everything in third stage
-    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-    Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
-    Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
+// if (level == "stage3")
+// {
+//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.ORANGE);
+//     Raylib.ClearBackground(Color.BEIGE);                  // Everything in third stage
+//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+//     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+//     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
 
-}
+// }
 }
 }
 
@@ -314,58 +316,67 @@ if (level == "stage1")
     }
     }
       
-            if (Raylib.CheckCollisionRecs(playerRect, pointRecs[0]) && pointTake == false)
+            if (Raylib.CheckCollisionRecs(playerRect, weaponRecs[0]) && weaponTake == false) // First collision detection with weapon rectangle 1
         {
-            pointTake = true;
-            pointTake2 = true;
+            weaponTake = true;
+            weaponTake2 = true;
 
         }
-        if (pointTake == false)
+        if (weaponTake == false)
         {
-            Raylib.DrawRectangleRec(pointRecs[0], Color.GREEN);
+            Raylib.DrawRectangleRec(weaponRecs[0], Color.WHITE); // Make sure to draw the weapon rectangle when it is False
         }
-        if (pointTake2 == true)
+        if (weaponTake2 == true)
         {
             Raylib.DrawText("Desert Eagle", 1650, 10, 22, Color.WHITE);
-            Raylib.DrawRectangleRec(pointRecs[1], Color.GREEN);
+            Raylib.DrawRectangleRec(weaponRecs[1], Color.GREEN);
             Raylib.DrawTexture(player2ImageDeagle, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
 
         }
-        if (Raylib.CheckCollisionRecs(playerRect, pointRecs[1]) && pointTake2 == true)
+        if (Raylib.CheckCollisionRecs(playerRect, weaponRecs[1]) && weaponTake2 == true)
         {
-            pointTake2 = false;
-            pointTake3 = true;
+            weaponTake2 = false;
+            weaponTake3 = true;
         }
-        if (pointTake3 == true)
+        if (weaponTake3 == true)
         {
             Raylib.DrawText("Ak-47", 1650, 10, 22, Color.WHITE);
             Raylib.DrawTexture(player2ImageAk,(int)playerRect.x, (int)playerRect.y, Color.WHITE);
+            Raylib.DrawRectangleRec(weaponRecs[2], Color.PURPLE);
         }
-
-
+        if (Raylib.CheckCollisionRecs(playerRect, weaponRecs[2]) && weaponTake3 == true)
+        {
+            weaponTake3 = false;
+            weaponTake4 = true;
+        }
+        if (weaponTake4 == true)
+        {
+            Raylib.DrawText("RPG", 1650, 10, 22, Color.WHITE);
+            Raylib.DrawTexture(player2ImageRPG,(int)playerRect.x, (int)playerRect.y, Color.WHITE);
+        }
 }
 
-if (level == "stage2")
-{
-    Raylib.DrawRectangle(0, 300, 1800, 600, Color.LIGHTGRAY);
-    Raylib.ClearBackground(Color.PURPLE);
-    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
-    Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
-}
+// if (level == "stage2")
+// {
+//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.LIGHTGRAY);
+//     Raylib.ClearBackground(Color.PURPLE);
+//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+//     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+//     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
+// }
 
-if (level == "stage3")
-{
-    Raylib.DrawRectangle(0, 300, 1800, 600, Color.LIGHTGRAY);
-    Raylib.ClearBackground(Color.VIOLET);
-    Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-    Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
-    Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
-}
+// if (level == "stage3")
+// {
+//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.LIGHTGRAY);
+//     Raylib.ClearBackground(Color.VIOLET);
+//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
+//     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+//     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
+//     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
+// }
 }
 
 Raylib.EndDrawing();
@@ -381,5 +392,6 @@ static Vector2 ReadMovement(float speed)
     return movement;
 }
 }
+
 
 
