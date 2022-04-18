@@ -254,7 +254,6 @@ if (level == "stage1")
         }
         if (Raylib.CheckCollisionRecs(playerRect, pointRecs[1]) && pointTake2 == true)
         {
-            points++;
             pointTake2 = false;
         }
 
@@ -304,7 +303,7 @@ if (level == "stage1")
     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("Level 1", 12, 10, 22, Color.WHITE);
     Raylib.DrawText("Deaths (" + deaths + ")", 450, 10, 22, Color.WHITE);
-    Raylib.DrawText("Score: " + points, 1680, 10, 22, Color.WHITE);
+    Raylib.DrawText("Weapon: ", 1550, 10, 22, Color.WHITE);
     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
     
        if (Raylib.CheckCollisionRecs(playerRect, rects[i]))
@@ -317,7 +316,6 @@ if (level == "stage1")
       
             if (Raylib.CheckCollisionRecs(playerRect, pointRecs[0]) && pointTake == false)
         {
-            points++;
             pointTake = true;
             pointTake2 = true;
 
@@ -328,18 +326,19 @@ if (level == "stage1")
         }
         if (pointTake2 == true)
         {
+            Raylib.DrawText("Desert Eagle", 1650, 10, 22, Color.WHITE);
             Raylib.DrawRectangleRec(pointRecs[1], Color.GREEN);
             Raylib.DrawTexture(player2ImageDeagle, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
 
         }
         if (Raylib.CheckCollisionRecs(playerRect, pointRecs[1]) && pointTake2 == true)
         {
-            points++;
             pointTake2 = false;
             pointTake3 = true;
         }
         if (pointTake3 == true)
         {
+            Raylib.DrawText("Ak-47", 1650, 10, 22, Color.WHITE);
             Raylib.DrawTexture(player2ImageAk,(int)playerRect.x, (int)playerRect.y, Color.WHITE);
         }
 
