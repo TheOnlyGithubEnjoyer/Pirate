@@ -56,13 +56,18 @@ Raylib.SetTargetFPS(60);
 Texture2D playerImage = Raylib.LoadTexture("pirate.png"); 
 Rectangle playerRect = new Rectangle(10, 60, 30, 30); 
 
+Texture2D bossImage = Raylib.LoadTexture("Enemy.png");
+Rectangle bossRect = new Rectangle(1500, 300, 50, 65);
+
 Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual
 Texture2D player2ImageDeagle = Raylib.LoadTexture("ZombieDeagle.png");
 Texture2D player2ImageAk = Raylib.LoadTexture("ZombieAk.png");
 Texture2D player2ImageRPG = Raylib.LoadTexture("zombieRPG.png");
 
 Texture2D backgroundImage = Raylib.LoadTexture("Background1.png");
+Texture2D backgroundImage2 = Raylib.LoadTexture("Background2.png");
 Rectangle backgroundRect = new Rectangle(0, 0, backgroundImage.width, backgroundImage.height);
+
 
 Rectangle headerRect = new Rectangle(0, 0, 1800, 40); 
 
@@ -105,6 +110,11 @@ weaponRecs.Add(new Rectangle(1175, 560, 25, 25));
 }
 
 
+int weapons = 0;
+
+int bossHP = 1000;
+
+int playerHP = 200;
 
 int deaths = 0;
 
@@ -331,6 +341,8 @@ if (level == "stage1")
             Raylib.DrawText("Desert Eagle", 1650, 10, 22, Color.WHITE);
             Raylib.DrawRectangleRec(weaponRecs[1], Color.GREEN);
             Raylib.DrawTexture(player2ImageDeagle, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+            weapons = 1;
+
 
         }
         if (Raylib.CheckCollisionRecs(playerRect, weaponRecs[1]) && weaponTake2 == true)
@@ -343,6 +355,8 @@ if (level == "stage1")
             Raylib.DrawText("Ak-47", 1650, 10, 22, Color.WHITE);
             Raylib.DrawTexture(player2ImageAk,(int)playerRect.x, (int)playerRect.y, Color.WHITE);
             Raylib.DrawRectangleRec(weaponRecs[2], Color.PURPLE);
+            weapons = 2;
+
         }
         if (Raylib.CheckCollisionRecs(playerRect, weaponRecs[2]) && weaponTake3 == true)
         {
@@ -353,30 +367,60 @@ if (level == "stage1")
         {
             Raylib.DrawText("RPG", 1650, 10, 22, Color.WHITE);
             Raylib.DrawTexture(player2ImageRPG,(int)playerRect.x, (int)playerRect.y, Color.WHITE);
+            weapons = 3;
+
         }
 }
 
-// if (level == "stage2")
-// {
-//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.LIGHTGRAY);
-//     Raylib.ClearBackground(Color.PURPLE);
-//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-//     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-//     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
-// }
+if (level == "stage2")
+{
+    Raylib.DrawTexture(backgroundImage2, (int)backgroundRect.x, (int)backgroundRect.y, Color.WHITE);
+    Raylib.DrawRectangleRec(headerRect, Color.RED);
+    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
+    Raylib.DrawText("Weapon: ", 1550, 10, 22, Color.WHITE);   
+    Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
+    Raylib.DrawText("Health:", 400, 10, 22, Color.WHITE);
+    Raylib.DrawText(playerHP.ToString(), 480, 10, 22, Color.WHITE);
+    
+    Raylib.DrawTexture(bossImage, (int)bossRect.x, (int)bossRect.y, Color.WHITE);
 
-// if (level == "stage3")
-// {
-//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.LIGHTGRAY);
-//     Raylib.ClearBackground(Color.VIOLET);
-//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-//     Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-//     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Zombie Game", 850, 10, 22, Color.WHITE);
-// }
+    if (weapons == 0)
+    {
+        Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    }
+    else if (weapons == 1)
+    {
+        Raylib.DrawTexture(player2ImageDeagle, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+        Raylib.DrawText("Desert Eagle", 1650, 10, 22, Color.WHITE);
+    }
+    else if (weapons == 2)
+    {
+        Raylib.DrawTexture(player2ImageAk, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+        Raylib.DrawText("Ak-47", 1650, 10, 22, Color.WHITE);
+    }
+    else if (weapons == 3)
+    {
+        Raylib.DrawTexture(player2ImageRPG, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+        Raylib.DrawText("RPG", 1650, 10, 22, Color.WHITE);
+    }
+
+    if (Raylib.CheckCollisionRecs(playerRect, bossRect))
+    {
+        playerHP --;
+    }
+    if(playerHP < 0)
+    {
+        level = "Game Over";
+    }
+}
+
+if (level == "Game Over")
+{
+    Raylib.ClearBackground(Color.RED);
+    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+    Raylib.DrawText("YOU ARE DIED", 840, 300, 35, Color.WHITE);
+}
 }
 
 Raylib.EndDrawing();
