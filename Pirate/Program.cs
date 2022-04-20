@@ -54,7 +54,7 @@ Raylib.SetTargetFPS(60);
 
 
 Texture2D playerImage = Raylib.LoadTexture("pirate.png"); 
-Rectangle playerRect = new Rectangle(10, 60, 30, 30); 
+Rectangle playerRect = new Rectangle(10, 60, 35, 40); 
 
 Texture2D bossImage = Raylib.LoadTexture("Enemy.png");
 Rectangle bossRect = new Rectangle(1500, 300, 50, 65);
@@ -126,12 +126,19 @@ bool weaponTake3 = false;
 
 bool weaponTake4 = false;
 
-float speed = 5f;           
+float speed = 5f;   
+
+float speed2 = 10f;
 
 bool moveX = false;         
-bool moveY = false;                 
+bool moveY = false; 
+
+bool moveX2 = false;
+bool moveY2 = false;
 
 Vector2 movement = new Vector2();
+
+Vector2 movement2 = new Vector2();
 
 string level = "stage1";
 
@@ -139,6 +146,9 @@ while (!Raylib.WindowShouldClose())
 {
     moveX = false;
     moveY = false;
+
+    moveX2 = false;
+    moveY2 = false;
 
     if (level == "stage1")
     {
@@ -163,18 +173,24 @@ while (!Raylib.WindowShouldClose())
 }
 
 if (level == "stage2")
-{                                           //PSEUDOKOD
-                            
+{                                           //PSEUDOKOD        
         movement = ReadMovement(speed);     // if (level of the game is 1)
         playerRect.x += movement.X;         // {movement of the character will be read and will have a speed
         playerRect.y += movement.Y;
 
-    if (playerRect.x < 0 || playerRect.x > 1800)    // if (the size of the player is less than 0 in x value or if the size
-    {                                               // of the player is at a bigger x value than 1800) 
+        movement2 = ReadMovement2(speed2);
+        bossRect.x += movement2.X;
+        bossRect.y += movement2.Y;
+
+    if (playerRect.x < 0 || playerRect.x > 1800 || bossRect.x < 0 || bossRect.x > 1800)    // if (the size of the player is less than 0 in x value or if the size
+    {                
+        moveX2 = true;                               // of the player is at a bigger x value than 1800) 
         moveX = true;                               // {movement left and right will work}
     }
-    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight()) // if (the value of y on the player goes lower than 42 or if the value of y
-    {                                                                                     // and the height of the player is a bigger value on y than the screen width)
+    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight() || bossRect.y < 42 || bossRect.y + bossRect.height > Raylib.GetScreenHeight()) 
+                                                                                        // if (the value of y on the player goes lower than 42 or if the value of y
+    {             
+        moveY2 = true;                                                                        // and the height of the player is a bigger value on y than the screen width)
         moveY = true;                                                                     // {movement down and up will work}
     }
         if (playerRect.x > 1800)                    // if (the player size of the x value exceeds 1800 in the x value)
@@ -215,6 +231,9 @@ if (level == "stage2")
 
 if (moveX == true) playerRect.x -= movement.X;
 if (moveY == true) playerRect.y -= movement.Y;
+
+if (moveX2 == true) bossRect.x -= movement2.X;
+if (moveY2 == true) bossRect.y -= movement2.Y;
 
 Raylib.BeginDrawing();
 {
@@ -283,17 +302,6 @@ if (level == "stage1")
     
 // }
 
-// if (level == "stage3")
-// {
-//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.ORANGE);
-//     Raylib.ClearBackground(Color.BEIGE);                  // Everything in third stage
-//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-//     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-//     Raylib.DrawText("Level 3", 12, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
-
-// }
 }
 }
 
@@ -418,7 +426,6 @@ if (level == "stage2")
 if (level == "Game Over")
 {
     Raylib.ClearBackground(Color.RED);
-    Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
     Raylib.DrawText("YOU ARE DIED", 840, 300, 35, Color.WHITE);
 }
 }
@@ -431,9 +438,19 @@ static Vector2 ReadMovement(float speed)
     if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) movement.Y = -speed;
     if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) movement.Y = speed;    // Movement with keyboard keys funktion
     if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) movement.X = -speed;
-    if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) movement.X = speed;     
+    if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) movement.X = speed;       
 
     return movement;
+}
+static Vector2 ReadMovement2(float speed2)
+{
+        Vector2 movement2 = new Vector2();
+    if (Raylib.IsKeyDown(KeyboardKey.KEY_UP)) movement2.Y = -speed2;
+    if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN)) movement2.Y = speed2;    // Movement with arrow keys funktion for stage2
+    if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) movement2.X = -speed2;
+    if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) movement2.X = speed2;  
+
+    return movement2;
 }
 }
 
