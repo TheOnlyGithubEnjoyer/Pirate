@@ -57,7 +57,7 @@ Texture2D playerImage = Raylib.LoadTexture("pirate.png");
 Rectangle playerRect = new Rectangle(10, 60, 35, 40); 
 
 Texture2D bossImage = Raylib.LoadTexture("Enemy.png");
-Rectangle bossRect = new Rectangle(1500, 300, 50, 65);
+Rectangle bossRect = new Rectangle(1500, 300, 100, 130);
 
 Texture2D player2Image = Raylib.LoadTexture("zombie.png"); //Everything that will be included as a visual
 Texture2D player2ImageDeagle = Raylib.LoadTexture("ZombieDeagle.png");
@@ -68,12 +68,15 @@ Texture2D backgroundImage = Raylib.LoadTexture("Background1.png");
 Texture2D backgroundImage2 = Raylib.LoadTexture("Background2.png");
 Rectangle backgroundRect = new Rectangle(0, 0, backgroundImage.width, backgroundImage.height);
 
+// Texture2D bulletImage = Raylib.LoadTexture("DeagleBullet.png");
+Rectangle bulletRect = new Rectangle((int)playerRect.x, (int)playerRect.y, 10, 10);
 
 Rectangle headerRect = new Rectangle(0, 0, 1800, 40); 
 
 List<Rectangle> weaponRecs = new List<Rectangle>();
 
 List<Rectangle> rects = new List<Rectangle>();
+
 
 
 for (int i = 0; i < 1; i++)
@@ -106,13 +109,15 @@ weaponRecs.Add(new Rectangle(208, 60, 25, 25));
 weaponRecs.Add(new Rectangle(658, 560, 25, 25));
 weaponRecs.Add(new Rectangle(1175, 560, 25, 25));
 
+// bulletRecs.Add(new Rectangle(playerRect.x, playerRect.y, 10, 10));
+// bulletRecs.Add(new Rectangle(playerRect.x, playerRect.y, 15, 15));
+// bulletRecs.Add(new Rectangle(playerRect.x, playerRect.y, 25, 25));
+
 
 }
 
 
 int weapons = 0;
-
-int bossHP = 1000;
 
 int playerHP = 200;
 
@@ -128,7 +133,11 @@ bool weaponTake4 = false;
 
 float speed = 5f;   
 
-float speed2 = 10f;
+float speed2 = 6f;
+
+float speed3 = 10f;
+
+bool shoot = false;
 
 bool moveX = false;         
 bool moveY = false; 
@@ -136,9 +145,13 @@ bool moveY = false;
 bool moveX2 = false;
 bool moveY2 = false;
 
+bool moveX3 = false;
+
 Vector2 movement = new Vector2();
 
 Vector2 movement2 = new Vector2();
+
+Vector2 movement3 = new Vector2();
 
 string level = "stage1";
 
@@ -170,7 +183,7 @@ while (!Raylib.WindowShouldClose())
         playerRect.x = 0;
     }
 
-}
+    }
 
 if (level == "stage2")
 {                                           //PSEUDOKOD        
@@ -182,7 +195,10 @@ if (level == "stage2")
         bossRect.x += movement2.X;
         bossRect.y += movement2.Y;
 
-    if (playerRect.x < 0 || playerRect.x > 1800 || bossRect.x < 0 || bossRect.x > 1800)    // if (the size of the player is less than 0 in x value or if the size
+        movement3 = ReadMovement3(speed3);
+        bulletRect.x += movement3.X;
+
+    if (playerRect.x < 0 || playerRect.x > 1800 || bossRect.x < 0 || bossRect.x > 1765)    // if (the size of the player is less than 0 in x value or if the size
     {                
         moveX2 = true;                               // of the player is at a bigger x value than 1800) 
         moveX = true;                               // {movement left and right will work}
@@ -234,6 +250,9 @@ if (moveY == true) playerRect.y -= movement.Y;
 
 if (moveX2 == true) bossRect.x -= movement2.X;
 if (moveY2 == true) bossRect.y -= movement2.Y;
+
+if (moveX3 == true) bulletRect.x += movement3.X;
+
 
 Raylib.BeginDrawing();
 {
@@ -289,18 +308,6 @@ if (level == "stage1")
         }
 
 }
-
-// if (level == "stage2")
-// {
-//     Raylib.DrawRectangle(0, 300, 1800, 600, Color.ORANGE);
-//     Raylib.ClearBackground(Color.GOLD);        // Everything in second stage    
-//     Raylib.DrawRectangleRec(headerRect, Color.BLACK);
-//     Raylib.DrawTexture(playerImage, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-//     Raylib.DrawText("Level 2", 12, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Score: ", 1680, 10, 22, Color.WHITE);
-//     Raylib.DrawText("Pirate Game", 850, 10, 22, Color.WHITE);
-    
-// }
 
 }
 }
@@ -393,6 +400,17 @@ if (level == "stage2")
     
     Raylib.DrawTexture(bossImage, (int)bossRect.x, (int)bossRect.y, Color.WHITE);
 
+
+    if(Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+    {
+        shoot = true;
+    }
+    if (shoot == true)
+    {
+        Raylib.DrawRectangleRec(bulletRect, Color.GREEN);
+        bulletRect.x = bulletRect.x + speed3;
+    }
+
     if (weapons == 0)
     {
         Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
@@ -451,6 +469,14 @@ static Vector2 ReadMovement2(float speed2)
     if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) movement2.X = speed2;  
 
     return movement2;
+}
+static Vector2 ReadMovement3(float speed3)
+{
+        Vector2 movement3 = new Vector2();
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)) movement3.X = speed3;
+    
+
+    return movement3;
 }
 }
 
