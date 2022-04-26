@@ -68,16 +68,14 @@ Texture2D backgroundImage = Raylib.LoadTexture("Background1.png");
 Texture2D backgroundImage2 = Raylib.LoadTexture("Background2.png");
 Rectangle backgroundRect = new Rectangle(0, 0, backgroundImage.width, backgroundImage.height);
 
-// Texture2D bulletImage = Raylib.LoadTexture("DeagleBullet.png");
-Rectangle bulletRect = new Rectangle((int)playerRect.x, (int)playerRect.y, 10, 10);
+Texture2D bulletImage = Raylib.LoadTexture("Bullet.png");
+Rectangle bulletRect = new Rectangle(playerRect.x, playerRect.y, bulletImage.width, bulletImage.height);
 
 Rectangle headerRect = new Rectangle(0, 0, 1800, 40); 
 
 List<Rectangle> weaponRecs = new List<Rectangle>();
 
 List<Rectangle> rects = new List<Rectangle>();
-
-
 
 for (int i = 0; i < 1; i++)
 {
@@ -109,11 +107,6 @@ weaponRecs.Add(new Rectangle(208, 60, 25, 25));
 weaponRecs.Add(new Rectangle(658, 560, 25, 25));
 weaponRecs.Add(new Rectangle(1175, 560, 25, 25));
 
-// bulletRecs.Add(new Rectangle(playerRect.x, playerRect.y, 10, 10));
-// bulletRecs.Add(new Rectangle(playerRect.x, playerRect.y, 15, 15));
-// bulletRecs.Add(new Rectangle(playerRect.x, playerRect.y, 25, 25));
-
-
 }
 
 
@@ -135,7 +128,7 @@ float speed = 5f;
 
 float speed2 = 6f;
 
-float speed3 = 10f;
+float speed3 = 5f;
 
 bool shoot = false;
 
@@ -222,29 +215,6 @@ if (level == "stage2")
 
 }
 
-    if (level == "stage3")
-    {
-        movement = ReadMovement(speed);
-        playerRect.x += movement.X;
-        playerRect.y += movement.Y;
-
-    if (playerRect.x < 0 || playerRect.x > 1800)
-    {
-        moveX = true;
-    }
-    if (playerRect.y < 42 || playerRect.y + playerRect.height > Raylib.GetScreenHeight())
-    {
-        moveY = true;
-    }
-    if (playerRect.x < 0)
-    {
-        level ="stage2";
-        playerRect.x = 1800;
-    }
-
-}
-
-
 if (moveX == true) playerRect.x -= movement.X;
 if (moveY == true) playerRect.y -= movement.Y;
 
@@ -306,6 +276,8 @@ if (level == "stage1")
         {
             weaponTake2 = false;
         }
+
+        //Have not expanded the game for the pirate
 
 }
 
@@ -401,14 +373,17 @@ if (level == "stage2")
     Raylib.DrawTexture(bossImage, (int)bossRect.x, (int)bossRect.y, Color.WHITE);
 
 
-    if(Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+
+
+    if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))      // if the SPACE BAR is pressed = the bool variable will become true
     {
         shoot = true;
     }
-    if (shoot == true)
+    if (shoot == true)                                   // if the bool variable is true
     {
-        Raylib.DrawRectangleRec(bulletRect, Color.GREEN);
-        bulletRect.x = bulletRect.x + speed3;
+        Raylib.DrawTexture(bulletImage, (int)bulletRect.x, (int)bulletRect.y, Color.WHITE);     // Draw in the bullet texture, bullet x value, bullet y value, and color white
+        bulletRect.x = bulletRect.x + speed3;    
+                                               // Once the variable is true, make the x value increase with speed3.
     }
 
     if (weapons == 0)
