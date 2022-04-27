@@ -69,13 +69,14 @@ Texture2D backgroundImage2 = Raylib.LoadTexture("Background2.png");
 Rectangle backgroundRect = new Rectangle(0, 0, backgroundImage.width, backgroundImage.height);
 
 Texture2D bulletImage = Raylib.LoadTexture("Bullet.png");
-Rectangle bulletRect = new Rectangle(playerRect.x, playerRect.y, bulletImage.width, bulletImage.height);
+Rectangle bulletRect = new Rectangle((int)playerRect.x, (int)playerRect.y, bulletImage.width, bulletImage.height);
 
 Rectangle headerRect = new Rectangle(0, 0, 1800, 40); 
 
-List<Rectangle> weaponRecs = new List<Rectangle>();
+List<Rectangle> weaponRecs = new List<Rectangle>();     // List for the weapon rectangles to make the collision detection work
 
-List<Rectangle> rects = new List<Rectangle>();
+List<Rectangle> rects = new List<Rectangle>();  // all of the obstacle rectangles on the first stage. 
+                                                // Helps with collision detection for all of the obstacles
 
 for (int i = 0; i < 1; i++)
 {
@@ -142,11 +143,11 @@ bool moveX3 = false;
 
 Vector2 movement = new Vector2();
 
-Vector2 movement2 = new Vector2();
+Vector2 movement2 = new Vector2();          // movement vectors
 
 Vector2 movement3 = new Vector2();
 
-string level = "stage1";
+string level = "stage1";        
 
 while (!Raylib.WindowShouldClose())
 {
@@ -373,8 +374,6 @@ if (level == "stage2")
     Raylib.DrawTexture(bossImage, (int)bossRect.x, (int)bossRect.y, Color.WHITE);
 
 
-
-
     if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))      // if the SPACE BAR is pressed = the bool variable will become true
     {
         shoot = true;
@@ -382,18 +381,17 @@ if (level == "stage2")
     if (shoot == true)                                   // if the bool variable is true
     {
         Raylib.DrawTexture(bulletImage, (int)bulletRect.x, (int)bulletRect.y, Color.WHITE);     // Draw in the bullet texture, bullet x value, bullet y value, and color white
-        bulletRect.x = bulletRect.x + speed3;    
-                                               // Once the variable is true, make the x value increase with speed3.
+        bulletRect.x = bulletRect.x + speed3;                                                  // Once the variable is true, make the x value increase with speed3.
     }
 
-    if (weapons == 0)
+    if (weapons == 0)               // If player hasn't touched the first weaponRect
     {
-        Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
+        Raylib.DrawTexture(player2Image, (int)playerRect.x, (int)playerRect.y, Color.WHITE); // Draw the player   
     }
-    else if (weapons == 1)
+    else if (weapons == 1)              
     {
-        Raylib.DrawTexture(player2ImageDeagle, (int)playerRect.x, (int)playerRect.y, Color.WHITE);
-        Raylib.DrawText("Desert Eagle", 1650, 10, 22, Color.WHITE);
+        Raylib.DrawTexture(player2ImageDeagle, (int)playerRect.x, (int)playerRect.y, Color.WHITE);  // Draw the player and add the text of the weapon
+        Raylib.DrawText("Desert Eagle", 1650, 10, 22, Color.WHITE);             
     }
     else if (weapons == 2)
     {
@@ -408,17 +406,17 @@ if (level == "stage2")
 
     if (Raylib.CheckCollisionRecs(playerRect, bossRect))
     {
-        playerHP --;
+        playerHP --;                // If the playerRect touches the BossRect, the player will lose HP
     }
     if(playerHP < 0)
     {
-        level = "Game Over";
+        level = "Game Over";        // If players HP is less than 0, change the level to "Game Over"
     }
 }
 
-if (level == "Game Over")
+if (level == "Game Over")       
 {
-    Raylib.ClearBackground(Color.RED);
+    Raylib.ClearBackground(Color.RED);                             // What happens when you lose all of your HP
     Raylib.DrawText("YOU ARE DIED", 840, 300, 35, Color.WHITE);
 }
 }
@@ -447,7 +445,7 @@ static Vector2 ReadMovement2(float speed2)
 }
 static Vector2 ReadMovement3(float speed3)
 {
-        Vector2 movement3 = new Vector2();
+        Vector2 movement3 = new Vector2(); 
     if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)) movement3.X = speed3;
     
 
